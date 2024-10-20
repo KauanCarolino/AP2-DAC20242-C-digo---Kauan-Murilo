@@ -12,6 +12,43 @@
     </h:head>
     
     <h:body>
+		<h:form id="cadastroForm">
+	        <p:panel header="Cadastro de Jogo">
+	            <h:panelGrid columns="2">
+	
+	                <h:outputLabel for="v1" value="Valor 1: " />
+	                <p:inputText id="v1" value="#{jogoBean.jogo.v1}" required="true">
+	                    <f:validateLongRange minimum="1" maximum="10"/>
+	                </p:inputText>
+	
+	                <h:outputLabel for="v2" value="Valor 2: " />
+	                <p:inputText id="v2" value="#{jogoBean.jogo.v2}" required="true">
+	                    <f:validateLongRange minimum="1" maximum="10"/>
+	                </p:inputText>
+	
+	                <h:outputLabel for="v3" value="Valor 3: " />
+	                <p:inputText id="v3" value="#{jogoBean.jogo.v3}" required="true">
+	                    <f:validateLongRange minimum="1" maximum="10"/>
+	                </p:inputText>
+	
+	                <h:outputLabel for="v4" value="Valor 4: " />
+	                <p:inputText id="v4" value="#{jogoBean.jogo.v4}" required="true">
+	                    <f:validateLongRange minimum="1" maximum="10"/>
+	                </p:inputText>
+	
+	                <h:outputLabel for="v5" value="Valor 5: " />
+	                <p:inputText id="v5" value="#{jogoBean.jogo.v5}" required="true">
+	                    <f:validateLongRange minimum="1" maximum="10"/>
+	                </p:inputText>
 
+	            </h:panelGrid>
+	
+	            <p:commandButton value="Salvar" action="#{jogoBean.salvar}" update="@form" 
+	            				 style="margin-top: 15px;"/>
+	            				 
+	            <h:outputLink value="listagem.xhtml" title="Ver lista" 
+	            			  style="margin-left: 15px;">Ver Lista</h:outputLink>
+	        </p:panel>
+	    </h:form>
     </h:body>
 </html>
