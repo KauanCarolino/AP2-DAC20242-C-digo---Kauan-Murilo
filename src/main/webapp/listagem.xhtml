@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <title>Listagem!</title>
+    </h:head>
+
+    <h:body>
+        <h:form id="form">
+            <p:dataTable id="table" value="#{jogoBean.jogos}" var="jogo" editable="true" editMode="row" update="@form">
+                <!-- Coluna ID -->
+                <p:column headerText="ID">
+                    <h:outputText value="#{jogo.id}" />
+                </p:column>
+
+                <!-- Coluna Valores com cellEditor -->
+                <p:column headerText="Valores" editor="true">
+                    <p:cellEditor>
+                        <f:facet name="output">
+                            <h:outputText value="#{jogo.v1}, #{jogo.v2}, #{jogo.v3}, #{jogo.v4}, #{jogo.v5}" />
+                        </f:facet>
+                        <f:facet name="input">
+                            <h:panelGrid columns="5">
+                                <p:inputText value="#{jogo.v1}" style="width:50px" />
+                                <p:inputText value="#{jogo.v2}" style="width:50px" />
+                                <p:inputText value="#{jogo.v3}" style="width:50px" />
+                                <p:inputText value="#{jogo.v4}" style="width:50px" />
+                                <p:inputText value="#{jogo.v5}" style="width:50px" />
+                            </h:panelGrid>
+                        </f:facet>
+                    </p:cellEditor>
+                </p:column>
+
+                <!-- Coluna Num Sorteado -->
+                <p:column headerText="Num Sorteado">
+                    <h:outputText value="#{jogo.numeroSorteado}" />
+                </p:column>
+
+                <!-- Botão para iniciar e finalizar a edição -->
+                <p:column headerText="Editar">
+                    <p:rowEditor />
+                </p:column>
+
+                <!-- Coluna Excluir -->
+                <p:column headerText="Excluir">
+                    <p:commandButton value="Excluir" action="#{jogoBean.excluirJogo(jogo)}" update="@form"/>
+                </p:column>
+
+                <!-- Coluna Maior -->
+                <p:column headerText="Maior">
+                    <p:commandButton value="Maior" action="#{jogoBean.exibirMaior(jogo)}" />
+                </p:column>
+
+                <!-- Coluna Result -->
+                <p:column headerText="Result">
+                    <p:commandButton value="Result" action="#{jogoBean.verificarNumeroSorteado(jogo)}" />
+                </p:column>
+
+                <!-- Chamar o método editar ao finalizar a edição -->
+                <p:ajax event="rowEdit" listener="#{jogoBean.editar(jogo)}" update="table" />
+            </p:dataTable>
+
+            <h:outputLink value="index.xhtml" title="Cadastrar Novo Jogo">Cadastrar Novo</h:outputLink>
+        </h:form>
+    </h:body>
+</html>
