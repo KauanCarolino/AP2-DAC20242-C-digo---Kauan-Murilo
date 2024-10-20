@@ -4,6 +4,8 @@ import java.util.Date;
 
 import javax.persistence.*;
 
+@NamedQuery(name = "Jogo.findMaxValue", query = "SELECT MAX(numeroSorteado) FROM Jogo j")
+
 @Entity
 public class Jogo {
 	

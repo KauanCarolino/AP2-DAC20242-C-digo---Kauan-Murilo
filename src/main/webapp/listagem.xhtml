@@ -13,6 +13,7 @@
 
     <h:body>
         <h:form id="form">
+        	<p:growl id="msgs" showDetail="true" />
             <p:dataTable id="table" value="#{jogoBean.jogos}" var="jogo" editable="true" editMode="row" update="@form">
                 <!-- Coluna ID -->
                 <p:column headerText="ID">
@@ -26,13 +27,14 @@
                             <h:outputText value="#{jogo.v1}, #{jogo.v2}, #{jogo.v3}, #{jogo.v4}, #{jogo.v5}" />
                         </f:facet>
                         <f:facet name="input">
-                            <h:panelGrid columns="5">
-                                <p:inputText value="#{jogo.v1}" style="width:50px" />
-                                <p:inputText value="#{jogo.v2}" style="width:50px" />
-                                <p:inputText value="#{jogo.v3}" style="width:50px" />
-                                <p:inputText value="#{jogo.v4}" style="width:50px" />
-                                <p:inputText value="#{jogo.v5}" style="width:50px" />
-                            </h:panelGrid>
+                             <p:inputText value="#{jogo.v1}, #{jogo.v2}, #{jogo.v3}, #{jogo.v4}, #{jogo.v5}"  />
+ 							
+ 							<!-- 
+                             <p:inputText value="#{jogo.v1}"  />
+                             <p:inputText value="#{jogo.v2}"  />
+                             <p:inputText value="#{jogo.v3}"  />
+                             <p:inputText value="#{jogo.v4}"  />
+                             <p:inputText value="#{jogo.v5}"  /> -->
                         </f:facet>
                     </p:cellEditor>
                 </p:column>
@@ -49,19 +51,26 @@
 
                 <!-- Coluna Excluir -->
                 <p:column headerText="Excluir">
-                    <p:commandButton value="Excluir" action="#{jogoBean.excluirJogo(jogo)}" update="@form"/>
+                    <p:commandButton value="Excluir" action="#{jogoBean.excluir(jogo)}" update="@form"/>
                 </p:column>
 
                 <!-- Coluna Maior -->
                 <p:column headerText="Maior">
-                    <p:commandButton value="Maior" action="#{jogoBean.exibirMaior(jogo)}" />
+                    <p:commandButton action="#{jogoBean.exibirMaiorNumeroValores(jogo)}" 
+	                 value="Exibir" update="@form" />
                 </p:column>
 
                 <!-- Coluna Result -->
-                <p:column headerText="Result">
-                    <p:commandButton value="Result" action="#{jogoBean.verificarNumeroSorteado(jogo)}" />
+                <p:column headerText="Maior">
+                    <p:commandButton action="#{jogoBean.verificarNumeroSorteado(jogo)}" 
+	                 value="Resultado" update="@form" />
                 </p:column>
 
+				<p:column headerText="Maior Numero (Sorteado)">
+   			 		<p:commandButton actionListener="#{jogoBean.exibirMaiorNumeroSorteado(item)}"
+       			 					 value="Exibir" update="@form" />
+				</p:column>
+				
                 <!-- Chamar o método editar ao finalizar a edição -->
                 <p:ajax event="rowEdit" listener="#{jogoBean.editar(jogo)}" update="table" />
             </p:dataTable>

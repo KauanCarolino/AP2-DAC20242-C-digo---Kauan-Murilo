@@ -43,10 +43,17 @@ public class JogoDAO {
 	
 	public static List<Jogo> Listar(){
 		EntityManager em = JPAUtil.criarEntityManager();
-		Query q = em.createQuery("select a from Jogo a");
+		Query q = em.createQuery("select j from Jogo j");
 		List<Jogo> lista = q.getResultList();
 		em.close();
 		return lista;
-		
+	}
+	
+	public static int obterMaiorNumeroSorteado(Jogo jogo) {
+	    EntityManager em = JPAUtil.criarEntityManager();        
+	    Query query = em.createNamedQuery("Jogo.findMaxValue");
+	    Integer maiorNumeroSorteado = (Integer) query.getSingleResult();
+	    em.close();
+	    return maiorNumeroSorteado;
 	}
 }
